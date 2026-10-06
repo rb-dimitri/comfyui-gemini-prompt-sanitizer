@@ -8,8 +8,8 @@ dependencies = []
 keywords = ["comfyui", "gemini", "llm", "prompt", "google"]
 
 [project.urls]
-Repository = "https://github.com/YOUR_GITHUB_USER/comfyui-gemini-prompt-sanitizer"
-"Bug Tracker" = "https://github.com/YOUR_GITHUB_USER/comfyui-gemini-prompt-sanitizer/issues"
+Repository = "https://github.com/rb-dimitri/comfyui-gemini-prompt-sanitizer"
+"Bug Tracker" = "https://github.com/rb-dimitri/comfyui-gemini-prompt-sanitizer/issues"
 
 [tool.comfy]
 PublisherId = ""

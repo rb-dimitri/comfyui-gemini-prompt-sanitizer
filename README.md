@@ -17,7 +17,7 @@ Use **Install via Git URL** and paste this repository's URL.
 ### Manual
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/YOUR_GITHUB_USER/comfyui-gemini-prompt-sanitizer.git
+git clone https://github.com/rb-dimitri/comfyui-gemini-prompt-sanitizer.git
 ```
 Restart ComfyUI afterwards.
 
