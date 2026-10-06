@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+*.env
+
+# ComfyUI workflows (may contain private instructions)
+workflows/
+*.workflow.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

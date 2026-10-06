@@ -1,0 +1,17 @@
+[project]
+name = "comfyui-gemini-prompt-sanitizer"
+description = "ComfyUI node that sends text to the Google Gemini API and returns the response as a STRING. No extra dependencies."
+version = "1.0.0"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["comfyui", "gemini", "llm", "prompt", "google"]
+
+[project.urls]
+Repository = "https://github.com/YOUR_GITHUB_USER/comfyui-gemini-prompt-sanitizer"
+"Bug Tracker" = "https://github.com/YOUR_GITHUB_USER/comfyui-gemini-prompt-sanitizer/issues"
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "Gemini Prompt Rewriter"
+Icon = ""
