@@ -6,7 +6,7 @@ output into any text input, such as **CLIP Text Encode**.
 
 - One node, one text field
 - No extra Python packages: it uses only the standard library
-- API key read from an environment variable, never stored in workflows
+- API key read from a local config file or environment variable, never stored in workflows
 - Defaults to `gemini-3.1-flash-lite`, Gemini's fastest and cheapest current model
 
 ## Installation
@@ -23,9 +23,19 @@ Restart ComfyUI afterwards.
 
 ## API key
 
-Get a key from [Google AI Studio](https://aistudio.google.com/apikey) and set it as an
-environment variable:
+Get a key from [Google AI Studio](https://aistudio.google.com/apikey), then use one of these options.
 
+### Option 1: config file (recommended)
+Copy `config.example.json` to `config.json` in this node's folder and paste in your key:
+```json
+{
+  "api_key": "your-key-here"
+}
+```
+`config.json` is listed in `.gitignore`, so it is never committed. Changes take effect on the next run,
+without restarting ComfyUI.
+
+### Option 2: environment variable
 **Windows**
 ```bash
 setx GEMINI_API_KEY "your-key-here"
@@ -37,6 +47,8 @@ export GEMINI_API_KEY="your-key-here"
 ```
 
 `GOOGLE_API_KEY` is also accepted. Restart ComfyUI, and the terminal that launches it, after setting the key.
+
+If both are set, `config.json` takes priority.
 
 ## Usage
 
@@ -73,6 +85,6 @@ the node raises an error and the workflow stops. It never passes the input throu
 
 ## Privacy
 
-- The API key is read only from the environment and is never written to any file.
+- The API key is read from `config.json` (git-ignored) or the environment, and never stored in workflows.
 - Text typed into the node is saved inside ComfyUI workflow `.json` files. Don't commit workflows
   that contain private instructions.

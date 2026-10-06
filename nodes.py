@@ -7,6 +7,7 @@ import urllib.request
 
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 ENV_KEYS = ("GEMINI_API_KEY", "GOOGLE_API_KEY")
+CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
 
 MODELS = [
     "gemini-3.1-flash-lite",   # default: cheapest current-gen, fast
@@ -27,14 +28,28 @@ SAFETY_SETTINGS = [
 ]
 
 
+def _read_config_key():
+    if not os.path.isfile(CONFIG_PATH):
+        return ""
+    try:
+        with open(CONFIG_PATH, encoding="utf-8-sig") as f:
+            return str(json.load(f).get("api_key", "")).strip()
+    except (OSError, ValueError, AttributeError) as e:
+        raise RuntimeError(f"Could not read {CONFIG_PATH}: {e}") from e
+
+
 def _get_api_key():
+    # Read on every call so edits to config.json apply without restarting ComfyUI.
+    key = _read_config_key()
+    if key:
+        return key
     for name in ENV_KEYS:
         key = os.environ.get(name, "").strip()
         if key:
             return key
     raise RuntimeError(
-        "Gemini API key not found. Set the GEMINI_API_KEY environment variable "
-        "and restart ComfyUI."
+        f"Gemini API key not found. Add it to {CONFIG_PATH} "
+        "(see config.example.json) or set the GEMINI_API_KEY environment variable."
     )
 
 
@@ -109,7 +124,8 @@ class GeminiPromptSanitizer:
     CATEGORY = "text/LLM"
     DESCRIPTION = (
         "Sends text to the Google Gemini API and returns the response as a STRING. "
-        "Reads the API key from the GEMINI_API_KEY (or GOOGLE_API_KEY) environment variable."
+        "Reads the API key from config.json in the node folder, or from the GEMINI_API_KEY "
+        "(or GOOGLE_API_KEY) environment variable."
     )
 
     def run(self, text, model, temperature=0.0, timeout_seconds=60):

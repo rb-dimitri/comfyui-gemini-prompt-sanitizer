@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Secrets
+config.json
 .env
 *.env
 
